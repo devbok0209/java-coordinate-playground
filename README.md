@@ -24,3 +24,11 @@ git checkout main // 기본 브랜치가 main인 경우
 git checkout -b 브랜치이름
 ex) git checkout -b apply-feedback
 ```
+
+### 연료 주입
+* 인터페이스, 추상 클래스의 차이가 있을까?
+* 이동거리 입력 받는 기능
+* 차량별 필요한 연료량 가지는 기능
+* 연료량 확인하는 보고서
+
+연비 = 주행거리 / 연료량

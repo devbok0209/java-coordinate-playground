@@ -60,3 +60,12 @@ ex) git checkout -b apply-feedback
 ### 좌표 계산기 (삼각형)
 * ~~좌표 값 세개 를 입력 받아 삼각형을 만드는 테스트~~
 * 삼각형의 넓이를 구하는 테스트 
+
+
+
+### TODO LIST 피드백 반영 리팩토링 하기
+* @BeforeEach
+* @AfterEach
+* setup, tearDown
+* Line(클래스) <- AbstractFigure(추상 클래스) <- Figure(인터페이스)
+* Function 사용하기

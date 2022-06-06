@@ -1,26 +1,18 @@
 package triangle;
 
+import figure.AbstractFigure;
 import straight.Coordinate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
-public class Triangle {
+public class Triangle extends AbstractFigure {
 
-    private List<Coordinate> coordinates;
-
-    public Triangle(String input) {
-        this.coordinates = new ArrayList<>();
-        String[] dots = input.split("-");
-        Arrays.stream(dots)
-                .forEach(dot -> coordinates.add(new Coordinate(dot)));
+    public Triangle(List<Coordinate> coordinates) {
+        super(coordinates);
     }
 
-    public List<Coordinate> getCoordinates() {
-        return coordinates;
-    }
-
+    @Override
     public double getArea() {
         Coordinate firstCoordinate = coordinates.get(0);
         Coordinate secondCoordinate = coordinates.get(1);
@@ -30,17 +22,13 @@ public class Triangle {
         double lengthB = getLength(secondCoordinate, lastCoordinate);
         double lengthC = getLength(lastCoordinate, firstCoordinate);
 
+        return usingHeronPrinciple(lengthA, lengthB, lengthC);
+    }
+
+    private long usingHeronPrinciple(double lengthA, double lengthB, double lengthC) {
         double s = (lengthA + lengthB + lengthC) / 2;
-
         double beforeRoot = s * (s - lengthA) * (s - lengthB) * (s - lengthC);
-
         return Math.round(Math.sqrt(beforeRoot));
     }
 
-    private double getLength(Coordinate start, Coordinate end) {
-
-        double xPoint = Math.pow(end.calculateXpoint(start), 2);
-        double yPoint = Math.pow(end.calculateYpoint(start), 2);
-        return Math.sqrt(xPoint + yPoint);
-    }
 }

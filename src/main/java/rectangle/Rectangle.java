@@ -1,23 +1,16 @@
 package rectangle;
 
+import figure.AbstractFigure;
 import straight.Coordinate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class Rectangle {
+public class Rectangle extends AbstractFigure {
 
-    private List<Coordinate> coordinates;
-
-    public Rectangle(String input) {
-        this.coordinates = new ArrayList<>();
-        String[] dots = input.split("-");
-        Arrays.stream(dots)
-                .forEach(dot -> coordinates.add(new Coordinate(dot)));
+    public Rectangle(List<Coordinate> coordinates) {
+        super(coordinates);
         isRectangle(coordinates);
     }
-
     private void isRectangle(List<Coordinate> coordinates) {
         Coordinate firstCoordinate = coordinates.get(0);
         Coordinate secondCoordinate = coordinates.get(1);
@@ -34,11 +27,7 @@ public class Rectangle {
             throw new IllegalArgumentException("마름모는 안됩니다!");
         }
     }
-
-    public List<Coordinate> getCoordinates() {
-        return coordinates;
-    }
-
+    @Override
     public double getArea() {
         Coordinate firstCoordinate = coordinates.get(0);
         Coordinate secondCoordinate = coordinates.get(1);
@@ -50,10 +39,4 @@ public class Rectangle {
         return width * height;
     }
 
-    public double getLength(Coordinate start, Coordinate end) {
-
-        double xPoint = Math.pow(end.calculateXpoint(start), 2);
-        double yPoint = Math.pow(end.calculateYpoint(start), 2);
-        return Math.sqrt(xPoint + yPoint);
-    }
 }

@@ -1,11 +1,27 @@
 package straight;
 
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class StraightTest {
+
+    private Straight straight;
+
+    @BeforeEach
+    void setUp() {
+        List<Coordinate> coordinates = new ArrayList<>();
+        coordinates.add(new Coordinate("(10,10)"));
+        coordinates.add(new Coordinate("(14,15)"));
+        this.straight = new Straight(coordinates);
+    }
 
     @Test
     @DisplayName("쉼표로 x, y 값 구분 테스트")
@@ -45,8 +61,6 @@ class StraightTest {
     @Test
     @DisplayName(" '-' 가 포함되어있으면 죄표값이 두개여야하는 테스트")
     void shouldTwoCoordinateWhenContainDash() {
-        String input = "(10,10)-(14,15)";
-        Straight straight = new Straight(input);
         assertEquals(new Coordinate("(10,10)"), straight.getCoordinate().get(0));
         assertEquals(new Coordinate("(14,15)"), straight.getCoordinate().get(1));
     }
@@ -54,10 +68,14 @@ class StraightTest {
     @Test
     @DisplayName("좌표 거리 계산 테스트")
     void shouldGetDistance() {
-        String input = "(10,10)-(14,15)";
-        Straight straight = new Straight(input);
-        double distance = straight.getDistance();
+        Coordinate start = straight.getCoordinate().get(0);
+        Coordinate end = straight.getCoordinate().get(1);
+        double distance = straight.getLength(start, end);
         assertEquals(6.403, distance, 0.001);
     }
 
+    @AfterEach
+    void tearDown() {
+        straight = null;
+    }
 }
